@@ -95,6 +95,23 @@ pub fn keybind(ui: &mut Ui, id: &str, label: &str, keycode: &mut KeyCode) -> boo
     .changed()
 }
 
+pub fn text_edit(ui: &mut Ui, label: &str, value: &mut String) -> bool {
+    ui.horizontal(|ui| {
+        let res = ui.text_edit_singleline(value);
+        ui.label(label);
+        res
+    })
+    .inner
+    .changed()
+}
+
+pub fn readonly_text(ui: &mut Ui, label: &str, value: &str) {
+    ui.horizontal(|ui| {
+        ui.add_enabled(false, egui::TextEdit::singleline(&mut value.to_owned()));
+        ui.label(label);
+    });
+}
+
 pub struct Keybind<'gui> {
     keycode: &'gui mut KeyCode,
     id: egui::Id,

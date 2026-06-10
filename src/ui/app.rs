@@ -162,6 +162,10 @@ impl ApplicationHandler for App {
                     }
                     self.frame_times.push_back(time);
                 }
+                UiMessage::LobbyUrl(url) => {
+                    self.config.web_radar.lobby_link = url;
+                    self.send_config();
+                }
             }
         }
 

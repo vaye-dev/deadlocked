@@ -110,6 +110,8 @@ impl CS2 {
             }
         }
 
+        self.web_radar(config);
+
         self.no_flash(config);
         self.fov_changer(config);
 

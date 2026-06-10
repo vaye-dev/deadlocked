@@ -17,11 +17,13 @@ mod helpers;
 mod hud;
 mod player;
 mod r#unsafe;
+mod web_radar;
 
 #[derive(PartialEq)]
 pub enum Tab {
     Aimbot,
     Player,
+    WebRadar,
     Hud,
     Grenades,
     Unsafe,
@@ -52,6 +54,7 @@ impl App {
             .show_inside(ui, |ui| {
                 ui.selectable_value(&mut self.current_tab, Tab::Aimbot, "\u{f04fe} Aimbot");
                 ui.selectable_value(&mut self.current_tab, Tab::Player, "\u{f0013} Player");
+                ui.selectable_value(&mut self.current_tab, Tab::WebRadar, "\u{f059f} Web Radar");
                 ui.selectable_value(&mut self.current_tab, Tab::Hud, "\u{f0379} Hud");
                 ui.selectable_value(&mut self.current_tab, Tab::Grenades, "\u{f0691} Grenades");
                 ui.selectable_value(&mut self.current_tab, Tab::Unsafe, "\u{f0ce6} Unsafe");
@@ -94,6 +97,7 @@ impl App {
         egui::CentralPanel::default().show_inside(ui, |ui| match self.current_tab {
             Tab::Aimbot => self.aimbot_settings(ui),
             Tab::Player => self.player_settings(ui),
+            Tab::WebRadar => self.web_radar_settings(ui),
             Tab::Hud => self.hud_settings(ui),
             Tab::Grenades => self.grenade_settings(ui),
             Tab::Unsafe => self.unsafe_settings(ui),

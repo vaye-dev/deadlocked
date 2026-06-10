@@ -73,6 +73,14 @@ impl GameManager {
                     previous_status = GameStatus::Working;
                 }
                 self.cs2.run(&self.config, &mut self.mouse);
+
+                if let Some(url) = CS2::web_radar_lobby_url() {
+                    if self.config.web_radar.lobby_link != url {
+                        self.config.web_radar.lobby_link = url.clone();
+                        self.send_message(UiMessage::LobbyUrl(url));
+                    }
+                }
+
                 let mut data = self.data.lock();
                 self.cs2.data(&self.config, &mut data);
             } else {

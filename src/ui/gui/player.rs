@@ -1,11 +1,11 @@
-use egui::{DragValue, Ui};
-
 use crate::ui::{
     app::App,
     gui::helpers::{
         checkbox, checkbox_hover, collapsing_open, color_picker, combo_box, drag, keybind, scroll,
+        text_edit,
     },
 };
+use egui::{DragValue, Ui};
 
 impl App {
     pub fn player_settings(&mut self, ui: &mut Ui) {

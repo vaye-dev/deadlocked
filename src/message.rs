@@ -26,4 +26,5 @@ pub struct GameMessage(pub Box<Config>);
 pub enum UiMessage {
     Status(GameStatus),
     FrameTime(Duration),
+    LobbyUrl(String),
 }

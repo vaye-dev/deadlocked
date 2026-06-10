@@ -14,11 +14,12 @@ mod message;
 mod os;
 mod parser;
 mod ui;
+mod websocket;
 
 #[cfg(not(target_os = "linux"))]
 compile_error!("only linux is supported.");
-
-fn main() {
+#[tokio::main]
+async fn main() {
     utils::log::init(
         LoggerOptions::default()
             .file(BASE_PATH.join("deadlocked.log"))
