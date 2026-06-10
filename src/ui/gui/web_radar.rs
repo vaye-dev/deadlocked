@@ -1,8 +1,8 @@
 use crate::ui::{
     app::App,
-    gui::helpers::{checkbox, readonly_text, text_edit},
+    gui::helpers::{checkbox, text_edit},
 };
-use egui::{DragValue, Ui};
+use egui::Ui;
 
 impl App {
     pub fn web_radar_settings(&mut self, ui: &mut Ui) {
@@ -22,6 +22,15 @@ impl App {
             self.send_config();
         }
 
-        readonly_text(ui, "Web Link", &mut self.config.web_radar.lobby_link);
+        ui.horizontal(|ui| {
+            ui.add_enabled(
+                false,
+                egui::TextEdit::singleline(&mut self.config.web_radar.lobby_link.clone()),
+            );
+            if ui.button("\u{f0c5}").clicked() {
+                ui.ctx().copy_text(self.config.web_radar.lobby_link.clone());
+            }
+            ui.label("Web Link");
+        });
     }
 }

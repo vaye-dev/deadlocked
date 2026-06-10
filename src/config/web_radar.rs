@@ -12,7 +12,7 @@ pub struct WebRadarConfig {
 impl Default for WebRadarConfig {
     fn default() -> Self {
         Self {
-            enabled: true,
+            enabled: false,
             web_radar_api: String::default(),
             web_radar_endpoint: String::default(),
             lobby_link: String::default(),

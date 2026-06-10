@@ -39,7 +39,7 @@ impl CS2 {
         let map = self.current_map();
         let players: Vec<Player> = self.players.clone();
 
-        let player_data: Vec<_> = players
+        let mut player_data: Vec<_> = players
             .iter()
             .filter_map(|p| {
                 let team = match p.team(self) {
@@ -55,9 +55,28 @@ impl CS2 {
                     "x": pos.x,
                     "y": pos.y,
                     "weapon": p.weapon_name(self),
+                    "money": 0,
                 }))
             })
             .collect();
+
+        if let Some(p) = Player::local_player(self) {
+            let pos = p.position(self);
+            let team = match p.team(self) {
+                TEAM_T => "T",
+                TEAM_CT => "CT",
+                _ => "?",
+            };
+            player_data.push(json!({
+                "name": p.name(self),
+                "team": team,
+                "hp": p.health(self),
+                "x": pos.x,
+                "y": pos.y,
+                "weapon": p.weapon_name(self),
+                "money": 0,
+            }));
+        }
 
         let _ = ws.send(json!({
             "cmd": "update",
@@ -102,6 +121,9 @@ impl CS2 {
                 let _ = WEBRADAR.set(client);
 
                 println!("WebRadar initialized");
+
+                // Keep the runtime alive so the io_loop task is not cancelled.
+                std::future::pending::<()>().await;
             });
         });
     }

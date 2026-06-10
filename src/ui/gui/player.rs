@@ -1,8 +1,7 @@
 use crate::ui::{
     app::App,
     gui::helpers::{
-        checkbox, checkbox_hover, collapsing_open, color_picker, combo_box, drag, keybind, scroll,
-        text_edit,
+        checkbox, checkbox_hover, collapsing_open, color_picker, combo_box, drag, keybind, scroll
     },
 };
 use egui::{DragValue, Ui};

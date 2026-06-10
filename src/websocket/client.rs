@@ -1,4 +1,4 @@
-use std::{net::SocketAddr, sync::Arc};
+use std::sync::Arc;
 
 use anyhow::{Context, anyhow};
 use futures::{SinkExt, StreamExt};
@@ -78,8 +78,9 @@ impl WebSocketClient {
 
         rx.recv().await
     }
-
+    
     /// Return immediately if no message exists.
+    #[allow(dead_code)]
     pub async fn try_read(&self) -> Option<Value> {
         let mut rx = self.rx.lock().await;
 
@@ -87,6 +88,7 @@ impl WebSocketClient {
     }
 
     /// Drain all queued messages without blocking.
+    #[allow(dead_code)]
     pub async fn drain(&self) -> Vec<Value> {
         let mut messages = Vec::new();
 

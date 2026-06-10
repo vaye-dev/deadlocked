@@ -8,7 +8,7 @@ utils = { git = "https://github.com/avitran0/utils" }
 bytemuck = "1.24"
 egui = "0.34"
 egui_glow = { version = "0.34", features = ["winit"] }
-egui-winit = { version = "0.34", default-features = false, features = ["x11"] }
+egui-winit = { version = "0.34", default-features = false, features = ["x11", "clipboard"] }
 epaint = { version = "0.34", features = ["serde"] }
 glam = { version = "0.32", features = ["bytemuck", "serde"] }
 glutin = { version = "0.32", default-features = false, features = [
