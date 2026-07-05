@@ -78,7 +78,7 @@ impl WebSocketClient {
 
         rx.recv().await
     }
-    
+
     /// Return immediately if no message exists.
     #[allow(dead_code)]
     pub async fn try_read(&self) -> Option<Value> {

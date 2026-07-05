@@ -41,6 +41,7 @@ impl CS2 {
 
         let mut player_data: Vec<_> = players
             .iter()
+            .chain(self.dead_players.iter())
             .filter_map(|p| {
                 let team = match p.team(self) {
                     TEAM_T => "T",
@@ -111,11 +112,11 @@ impl CS2 {
 
                 let _ = client.send(json!({"cmd": "lobby", "id": "open"}));
 
-                if let Some(msg) = client.read().await {
-                    if let Some(url) = msg["data"]["url"].as_str() {
-                        let _ = LOBBY_URL.set(url.to_string());
-                        println!("Lobby created: {}", url);
-                    }
+                if let Some(msg) = client.read().await
+                    && let Some(url) = msg["data"]["url"].as_str()
+                {
+                    let _ = LOBBY_URL.set(url.to_string());
+                    println!("Lobby created: {}", url);
                 }
 
                 let _ = WEBRADAR.set(client);

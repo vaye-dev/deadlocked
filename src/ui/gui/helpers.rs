@@ -105,7 +105,6 @@ pub fn text_edit(ui: &mut Ui, label: &str, value: &mut String) -> bool {
     .changed()
 }
 
-
 pub struct Keybind<'gui> {
     keycode: &'gui mut KeyCode,
     id: egui::Id,
